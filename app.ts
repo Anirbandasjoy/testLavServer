@@ -1,7 +1,8 @@
 import express, { NextFunction, Request, Response } from "express";
+const app = express();
+import cors from "cors";
 import "dotenv/config";
 import "./config/passport";
-import cors from "cors";
 import session from "express-session";
 import passport from "passport";
 import { cookieParser, createError } from "./helper/import";
@@ -11,16 +12,13 @@ import authRouter from "./routes/auth.router";
 import foodRouter from "./routes/food.router";
 import cartRouter from "./routes/cart.router";
 import orderRouter from "./routes/order.router";
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 const corsOptions = {
-  origin: "https://testylav.vercel.app",
+  origin: ["http://localhost:5173", "https://testylav.vercel.app"],
   credentials: true,
 };
-
 app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(
   session({

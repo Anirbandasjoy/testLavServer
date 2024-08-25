@@ -1,4 +1,5 @@
 import { Router } from "express";
+const foodRouter = Router();
 import {
   handleCreateFood,
   handleDeleteFood,
@@ -6,8 +7,6 @@ import {
   handleFindSingleFood,
 } from "../controller/food.controller";
 import { isAdmin, isLogin } from "../middleware/auth";
-
-const foodRouter = Router();
 
 foodRouter.post("/create", isLogin, isAdmin, handleCreateFood);
 foodRouter.get("/find", handleFindAllFood);
